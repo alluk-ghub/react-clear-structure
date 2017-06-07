@@ -1,0 +1,1 @@
+export const ACTION_SET_TITLE = 'SET_TITLE';

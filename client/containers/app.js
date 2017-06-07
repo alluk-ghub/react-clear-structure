@@ -1,19 +1,31 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import Page from '../components/page';
+import * as pageActions from '../actions/pageActions';
 
 class App extends Component {
+    render() {
+        const { page } = this.props;
+        const { setTitle } = this.props.pageActions;
 
-	render() {
-		return <Page title={this.props.page.title} />
-	}
+        return <Page title = { page.title }
+        setTitle = { setTitle }
+        />
+    }
 }
 
-function mapStateToProps (state) {
-  return {
-    page: state.page
-  }
+function mapStateToProps(state) {
+    return {
+        page: state.page
+    }
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+    return {
+        pageActions: bindActionCreators(pageActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
